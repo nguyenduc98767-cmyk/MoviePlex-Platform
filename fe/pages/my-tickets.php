@@ -183,7 +183,11 @@ async function loadTickets() {
     const data = await res.json();
     if (!data.success) throw new Error(data.message);
 
-    allTickets = data.data || { upcoming: [], past: [], cancelled: [] };
+    allTickets = {
+      upcoming: data.upcoming || [],
+      past: data.past || [],
+      cancelled: data.cancelled || []
+    };
     document.getElementById('cnt-upcoming').textContent = allTickets.upcoming.length;
     document.getElementById('cnt-past').textContent = allTickets.past.length;
     document.getElementById('cnt-cancelled').textContent = allTickets.cancelled.length;
