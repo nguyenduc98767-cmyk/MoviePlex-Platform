@@ -362,13 +362,13 @@ tail -f ~/webhook/webhook.log
 ---
 
 ## Thành viên nhóm
-
-| Tên | Vai trò | GitHub |
-| --- | ------- | ------ |
-|     |         |        |
-
+| Thành viên | Nhiệm vụ cụ thể | Mức độ hoàn thành |
+|-------------|------------------------------|---------------------------------|
+| **Bùi Duy Nam** (Trưởng nhóm) | Khảo sát yêu cầu, thiết kế CSDL tổng thể. Thiết lập Docker, luồng CI/CD (GitHub Actions, Webhook, ngrok). Phát triển các tính năng Đặt vé, Lịch chiếu, Xác nhận đặt vé. | 30% |
+| **Trần Đức Phát** | Thiết kế UI và lập trình chức năng trang quản trị Admin (Quản lý phim, Quản lý rạp, Quản lý lịch chiếu, Quản lý tài khoản). | 25% |
+| **Hoàng Văn Chương** | Phát triển chức năng cho khách hàng (Trang chủ, Chi tiết phim, Chọn ghế ngồi trực quan và Trang cá nhân). | 25% |
+| **Nguyễn Vũ Đức** | Phát triển chức năng đăng nhập, đăng ký, quên mật khẩu, cấu hình gửi email bằng PHPMailer.| 20% |
 ---
-
 ## Ghi chú
 
 <<<<<<< HEAD
