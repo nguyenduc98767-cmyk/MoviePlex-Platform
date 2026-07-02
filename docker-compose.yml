@@ -12,6 +12,8 @@ services:
       - .:/var/www/html
       - ./docker/php/apache.conf:/etc/apache2/sites-available/000-default.conf
       - ./docker/php/php.ini:/usr/local/etc/php/conf.d/custom.ini
+    env_file:
+      - .env
     environment:
       DB_HOST: mysql
       DB_NAME: ${DB_NAME:-movieflex_db}

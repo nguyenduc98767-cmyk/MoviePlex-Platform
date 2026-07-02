@@ -157,13 +157,19 @@ class AuthService
 
         $this->userModel->savePasswordResetToken($email, $otp, $expiresAt);
 
-        // Dev mode: return OTP directly. Production: use MailService to send email.
+        require_once __DIR__ . '/MailService.php';
+        $mailService = new MailService();
+        $isSent = $mailService->sendPasswordReset($email, $user['full_name'], $otp);
+
+        if (!$isSent) {
+            return $this->fail('Không thể gửi email lúc này, vui lòng kiểm tra lại cấu hình.');
+        }
+
         $this->logger->log('Quên mật khẩu', "Yêu cầu OTP cho email [{$email}].", $user['full_name'], 'user');
 
         return [
             'success' => true,
-            'message' => 'Mã OTP đã được tạo thành công.',
-            'dev_otp' => $otp, // Remove this in production; replaced by MailService
+            'message' => 'Mã OTP đã được gửi đến email của bạn.',
         ];
     }
 

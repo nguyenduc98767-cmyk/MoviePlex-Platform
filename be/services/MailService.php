@@ -13,7 +13,7 @@ class MailService
     public function __construct()
     {
         // DEV_MODE = true: skip actual SMTP, log OTP to error_log instead
-        $this->devMode   = (getenv('MAIL_DEV_MODE') ?: 'true') === 'true';
+        $this->devMode = false;
         $this->smtpHost  = getenv('MAIL_HOST')     ?: 'smtp.gmail.com';
         $this->smtpPort  = (int)(getenv('MAIL_PORT') ?: 587);
         $this->smtpUser  = getenv('MAIL_USERNAME') ?: '';
@@ -70,7 +70,7 @@ class MailService
             $mail->SMTPAuth   = true;
             $mail->Username   = $this->smtpUser;
             $mail->Password   = $this->smtpPass;
-            $mail->SMTPSecure = \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->SMTPSecure = $this->smtpPort === 465 ? \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS : \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       = $this->smtpPort;
             $mail->CharSet    = 'UTF-8';
 

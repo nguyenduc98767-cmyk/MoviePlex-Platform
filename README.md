@@ -371,5 +371,10 @@ tail -f ~/webhook/webhook.log
 
 ## Ghi chú
 
+<<<<<<< HEAD
 them
 Dự án phục vụ mục đích học tập — nhóm môn học tại Trường Đại học Công nghệ Giao thông Vận tải (UTT).
+=======
+Dự án phục vụ mục đích học tập — nhóm môn học tại Trường Đại học Công nghệ Giao thông Vận tải (UTT).
+
+ngonnnnnnnnnnnn
