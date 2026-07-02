@@ -119,24 +119,33 @@ class BookingService
         ];
     }
 
-    public function calculateSnackTotal(array $snacks): int
+    private function calculateSnackTotal(array $snacks): float
     {
         if (empty($snacks)) {
-            return 0;
+            return 0.0;
         }
 
-        $ids = array_unique(array_column($snacks, 'id'));
+        $ids = array_values(array_unique(array_column($snacks, 'id')));
+
+        if (empty($ids)) {
+            return 0.0;
+        }
+
         $placeholders = implode(',', array_fill(0, count($ids), '?'));
         $stmt = $this->pdo->prepare("SELECT id, price FROM snacks WHERE id IN ($placeholders)");
         $stmt->execute($ids);
-        $prices = $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
+        $priceMap = $stmt->fetchAll(PDO::FETCH_KEY_PAIR); // id => price
 
-        $total = 0;
+        $total = 0.0;
         foreach ($snacks as $snack) {
-            $id = (int) ($snack['id'] ?? 0);
-            if (isset($prices[$id])) {
-                $total += (int) $prices[$id];
+            $id  = $snack['id'] ?? null;
+            $qty = (int) ($snack['quantity'] ?? 1);
+
+            if ($id === null || !isset($priceMap[$id])) {
+                continue; // hoặc throw exception nếu muốn strict
             }
+
+            $total += (float) $priceMap[$id] * $qty;
         }
 
         return $total;
@@ -235,8 +244,17 @@ class BookingService
                 'transaction_id'    => $transactionId,
             ];
         } catch (Exception $e) {
-            $this->pdo->rollBack();
-            return ['success' => false, 'message' => 'Đặt vé thất bại. Vui lòng thử lại.'];
+
+            if ($this->pdo->inTransaction()) {
+                $this->pdo->rollBack();
+            }
+
+            return [
+                'success' => false,
+                'message' => $e->getMessage(),
+                'file'    => $e->getFile(),
+                'line'    => $e->getLine()
+            ];
         }
     }
 

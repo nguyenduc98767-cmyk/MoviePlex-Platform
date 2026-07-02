@@ -142,12 +142,15 @@ class Showtime
     {
         $stmt = $this->pdo->prepare(
             'UPDATE showtimes
-             SET available_seats = available_seats - :count
-             WHERE id = :id AND available_seats >= :count'
+            SET available_seats = available_seats - :count
+            WHERE id = :id AND available_seats >= :min_count'
         );
-        return $stmt->execute([':count' => $count, ':id' => $showtimeId]);
+        return $stmt->execute([
+            ':count'     => $count,
+            ':id'        => $showtimeId,
+            ':min_count' => $count,
+        ]);
     }
-
     public function incrementAvailableSeats(int $showtimeId, int $count): bool
     {
         $stmt = $this->pdo->prepare(
