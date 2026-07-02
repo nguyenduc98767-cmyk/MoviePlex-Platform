@@ -35,14 +35,14 @@
 
 Dự án chạy trên **máy chủ Linux (Ubuntu Server 24.04 LTS)** cài trong VirtualBox.
 
-| Dịch vụ        | Mô tả                                                          |
-| -------------- | -------------------------------------------------------------- |
-| SSH            | Đăng nhập và quản lý server từ xa                              |
-| SFTP           | Truyền file lên/xuống server qua SSH                           |
-| SVN Server     | Quản lý mã nguồn tập trung (Apache + mod_dav_svn)              |
-| Docker         | Chạy web server (PHP/Apache) và database (MySQL) trong container |
+| Dịch vụ        | Mô tả                                                               |
+| -------------- | ------------------------------------------------------------------- |
+| SSH            | Đăng nhập và quản lý server từ xa                                   |
+| SFTP           | Truyền file lên/xuống server qua SSH                                |
+| SVN Server     | Quản lý mã nguồn tập trung (Apache + mod_dav_svn)                   |
+| Docker         | Chạy web server (PHP/Apache) và database (MySQL) trong container    |
 | ngrok          | Expose webhook server ra internet để nhận request từ GitHub Actions |
-| GitHub Actions | Tự động deploy khi push code lên nhánh main                   |
+| GitHub Actions | Tự động deploy khi push code lên nhánh main                         |
 
 ---
 
@@ -72,14 +72,14 @@ MoviePlex-Platform/
 
 ## Yêu cầu môi trường
 
-| Công cụ                      | Ghi chú                              |
-| ---------------------------- | ------------------------------------ |
-| VirtualBox                   | Chạy máy ảo Ubuntu Server            |
-| Docker Engine + Docker Compose | Cài trên máy ảo Linux              |
-| Git                          | Cài trên máy thật                    |
-| TortoiseSVN                  | Cài trên máy thật (Windows)          |
-| ngrok                        | Cài trên máy ảo Linux                |
-| php-cli                      | Cài trên máy ảo Linux (chạy webhook) |
+| Công cụ                        | Ghi chú                              |
+| ------------------------------ | ------------------------------------ |
+| VirtualBox                     | Chạy máy ảo Ubuntu Server            |
+| Docker Engine + Docker Compose | Cài trên máy ảo Linux                |
+| Git                            | Cài trên máy thật                    |
+| TortoiseSVN                    | Cài trên máy thật (Windows)          |
+| ngrok                          | Cài trên máy ảo Linux                |
+| php-cli                        | Cài trên máy ảo Linux (chạy webhook) |
 
 ---
 
@@ -132,6 +132,7 @@ docker compose up -d --build
 ```
 
 Lần đầu chạy sẽ mất vài phút để tải image và build. Docker tự động:
+
 - Build PHP/Apache image từ `docker/php/Dockerfile`
 - Khởi tạo database từ `docker/mysql/init.sql`
 - Tạo volume `mysql_data` để lưu dữ liệu bền vững
@@ -186,11 +187,11 @@ ngrok config add-authtoken <YOUR_AUTHTOKEN>
 
 ### Bước 8 — Truy cập từ máy thật
 
-| Dịch vụ    | URL                      |
-| ---------- | ------------------------ |
-| Ứng dụng   | http://<IP_MÁY_ẢO>:8080  |
-| phpMyAdmin | http://<IP_MÁY_ẢO>:8081  |
-| MySQL      | <IP_MÁY_ẢO>:3306         |
+| Dịch vụ    | URL                     |
+| ---------- | ----------------------- |
+| Ứng dụng   | http://<IP*MÁY*ẢO>:8080 |
+| phpMyAdmin | http://<IP*MÁY*ẢO>:8081 |
+| MySQL      | <IP*MÁY*ẢO>:3306        |
 
 ---
 
@@ -242,6 +243,7 @@ git push origin main
 ```
 
 Sau khi push, GitHub Actions sẽ tự động:
+
 1. Chạy workflow trong `.github/workflows/deploy.yml`
 2. Gọi webhook đến máy ảo qua ngrok
 3. Máy ảo tự `git pull` và `docker compose restart php-apache`
@@ -331,11 +333,11 @@ exit            # thoát
 
 ## Quản lý SVN Server
 
-| Thông tin | Giá trị |
-| --------- | ------- |
-| SVN URL   | http://<IP_MÁY_ẢO>/svn/duan_phanmem/trunk |
-| User sv01 | Quyền đọc/ghi toàn bộ repo |
-| User sv02 | Quyền đọc/ghi toàn bộ repo |
+| Thông tin | Giá trị                                   |
+| --------- | ----------------------------------------- |
+| SVN URL   | http://<IP*MÁY*ẢO>/svn/duan_phanmem/trunk |
+| User sv01 | Quyền đọc/ghi toàn bộ repo                |
+| User sv02 | Quyền đọc/ghi toàn bộ repo                |
 
 ---
 
@@ -369,4 +371,5 @@ tail -f ~/webhook/webhook.log
 
 ## Ghi chú
 
+them
 Dự án phục vụ mục đích học tập — nhóm môn học tại Trường Đại học Công nghệ Giao thông Vận tải (UTT).
