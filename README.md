@@ -368,16 +368,13 @@ tail -f ~/webhook/webhook.log
 | **Trần Đức Phát** | Thiết kế UI và lập trình chức năng trang quản trị Admin (Quản lý phim, Quản lý rạp, Quản lý lịch chiếu, Quản lý tài khoản). | 25% |
 | **Hoàng Văn Chương** | Phát triển chức năng cho khách hàng (Trang chủ, Chi tiết phim, Chọn ghế ngồi trực quan và Trang cá nhân). | 25% |
 | **Nguyễn Vũ Đức** | Phát triển chức năng đăng nhập, đăng ký, quên mật khẩu, cấu hình gửi email bằng PHPMailer.| 20% |
-11
 ---
-
-
 ## Ghi chú
-
 <<<<<<< HEAD
-them
+
+
+
 Dự án phục vụ mục đích học tập — nhóm môn học tại Trường Đại học Công nghệ Giao thông Vận tải (UTT).
 =======
-Dự án phục vụ mục đích học tập — nhóm môn học tại Trường Đại học Công nghệ Giao thông Vận tải (UTT).
 
-ngonnnnnnnnnnnn
+
